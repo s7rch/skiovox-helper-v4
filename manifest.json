@@ -79,8 +79,7 @@
     "scripts": [
       "/background/commands.js",
       "/background/setup.js",
-      "/background/webstore-fix.js",
-      "/background/redirect.js"
+      "/background/webstore-fix.js"
     ]
   },
   "permissions": [
