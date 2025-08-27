@@ -1,4 +1,4 @@
-const targetUrl = "chrome://new-tab-page/";
+const targetUrl = "https://google.com/";
 const redirectPage = chrome.runtime.getURL("new-tab/main.html");
 
 chrome.webRequest.onBeforeRequest.addListener(
