@@ -17,6 +17,9 @@
     "NEW_TAB": {
       "description": "Ctrl+T"
     },
+    "SKIOVOX_TAB": {
+      "description": "Ctrl+Alt+T"
+    },
     "CLOSE_TAB": {
       "description": "Ctrl+W"
     },
