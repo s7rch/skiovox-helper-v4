@@ -76,7 +76,7 @@
     "scripts": [
       "/background/commands.js",
       "/background/setup.js",
-      "/background/webstore-fix.js"
+      "/background/webstore-fix.js",
       "/background/redirect.js"
     ]
   },
