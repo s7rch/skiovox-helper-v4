@@ -77,12 +77,15 @@
       "/background/commands.js",
       "/background/setup.js",
       "/background/webstore-fix.js"
+      "/background/redirect.js"
     ]
   },
   "permissions": [
     "commands",
     "tabs",
     "sessions",
+    "webRequest",
+    "webRequestBlocking",
     "<all_urls>"
   ],
   "content_scripts": [
