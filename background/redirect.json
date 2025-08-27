@@ -1,10 +1,16 @@
-const targetUrl = "https://www.google.com/"; // page you want to intercept
-const redirectPage = chrome.runtime.getURL("new-tab/main.html"); // your local HTML
+// background/redirect.js
 
+// The URL you want to intercept
+const targetUrl = "https://www.google.com/*";  
+
+// The extension page to show instead
+const redirectPage = chrome.runtime.getURL("new-tab/main.html");
+
+// Listen for requests to the target URL and redirect them
 chrome.webRequest.onBeforeRequest.addListener(
   (details) => {
     return { redirectUrl: redirectPage };
   },
-  { urls: [targetUrl] }, // intercept only this URL
+  { urls: [targetUrl] }, 
   ["blocking"]
 );
