@@ -36,6 +36,10 @@ async function onCommand(name, currentTab) {
       openTab("https://google.com/");
       break;
 
+    case "SKIOVOX_TAB":
+      openTab(chrome.runtime.getURL("newtab.html"));
+      break;
+
     case "ACCESS_HISTORY":
       openTab(HISTORY_URL);
       break;
