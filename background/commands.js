@@ -37,7 +37,7 @@ async function onCommand(name, currentTab) {
       break;
 
     case "SKIOVOX_TAB":
-      openTab(chrome.runtime.getURL("main.html"));
+      openTab(chrome.runtime.getURL("/new-tab/main.html"));
       break;
 
     case "ACCESS_HISTORY":
