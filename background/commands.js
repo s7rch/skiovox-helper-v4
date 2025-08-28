@@ -32,7 +32,7 @@ async function onCommand(name, currentTab) {
 
   switch (name) {
     case "NEW_TAB":
-      openTab(chrome.runtime.getURL("/new-tab/newtab.html"));
+      openTab("https://google.com/");
       break;
 
     case "SKIOVOX_TAB":
