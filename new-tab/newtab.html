@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Tab</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Google Sans", Arial, sans-serif;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+    }
+    .search-bar {
+      margin-top: 150px;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 10px 15px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 24px;
+      outline: none;
+    }
+    .tiles {
+      margin-top: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      width: 60%;
+    }
+    .tile {
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f2f2f2;
+      border-radius: 12px;
+      font-size: 14px;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .tile:hover {
+      background: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="search-bar">
+    <form id="searchForm">
+      <input type="text" placeholder="Search Google or type a URL" id="searchInput">
+    </form>
+  </div>
+  <div class="tiles" id="tilesContainer">
+    <!-- Most visited sites will appear here -->
+  </div>
+
+  <script>
+    // Google search form
+    const form = document.getElementById('searchForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const query = document.getElementById('searchInput').value;
+      if(query) window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+    });
+
+    // Load most visited sites using Chrome History API
+    if(chrome && chrome.topSites) {
+      chrome.topSites.get((sites) => {
+        const container = document.getElementById('tilesContainer');
+        sites.slice(0, 8).forEach(site => {
+          const a = document.createElement('a');
+          a.href = site.url;
+          a.className = 'tile';
+          a.textContent = site.title || site.url;
+          a.target = '_blank';
+          container.appendChild(a);
+        });
+      });
+    } else {
+      document.getElementById('tilesContainer').innerText = "Most visited sites unavailable";
+    }
+  </script>
+</body>
+</html>
