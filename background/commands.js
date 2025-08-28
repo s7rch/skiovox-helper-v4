@@ -32,8 +32,7 @@ async function onCommand(name, currentTab) {
 
   switch (name) {
     case "NEW_TAB":
-      // Open Google instead of a blank tab
-      openTab("https://google.com/");
+      openTab(chrome.runtime.getURL("/new-tab/newtab.html"));
       break;
 
     case "SKIOVOX_TAB":
