@@ -1,95 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>New Tab</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Google Sans", Arial, sans-serif;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-    }
-    .search-bar {
-      margin-top: 150px;
-      width: 50%;
-      display: flex;
-      justify-content: center;
-    }
-    .search-bar input {
-      width: 100%;
-      padding: 10px 15px;
-      font-size: 18px;
-      border: 1px solid #ccc;
-      border-radius: 24px;
-      outline: none;
-    }
-    .tiles {
-      margin-top: 50px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      width: 60%;
-    }
-    .tile {
-      width: 120px;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f2f2f2;
-      border-radius: 12px;
-      font-size: 14px;
-      text-align: center;
-      cursor: pointer;
-      text-decoration: none;
-      color: black;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
-    .tile:hover {
-      background: #e0e0e0;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>New Tab</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Google Sans", Arial, sans-serif;
+    background: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('https://www.gstatic.com/dui/ntp/backgrounds/1.jpg'); /* default Chrome background */
+    background-size: cover;
+    filter: brightness(0.95);
+    z-index: -1;
+  }
+
+  .greeting {
+    margin-top: 60px;
+    font-size: 28px;
+    color: #202124;
+  }
+
+  .search-bar {
+    margin-top: 20px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-bar input {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 24px;
+    border: 1px solid #dfe1e5;
+    outline: none;
+    box-shadow: 0 1px 6px rgba(32,33,36,.28);
+  }
+
+  .tiles {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 60%;
+  }
+
+  .tile {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+</style>
 </head>
 <body>
+  <div class="greeting" id="greeting">Good Day</div>
+
   <div class="search-bar">
     <form id="searchForm">
-      <input type="text" placeholder="Search Google or type a URL" id="searchInput">
+      <input type="text" id="searchInput" placeholder="Search Google or type a URL">
     </form>
   </div>
+
   <div class="tiles" id="tilesContainer">
     <!-- Most visited sites will appear here -->
   </div>
 
   <script>
-    // Google search form
+    // Dynamic greeting
+    const greetingEl = document.getElementById('greeting');
+    const hour = new Date().getHours();
+    if(hour < 12) greetingEl.textContent = "Good Morning";
+    else if(hour < 18) greetingEl.textContent = "Good Afternoon";
+    else greetingEl.textContent = "Good Evening";
+
+    // Google search functionality
     const form = document.getElementById('searchForm');
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const query = document.getElementById('searchInput').value;
-      if(query) window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+      const query = document.getElementById('searchInput').value.trim();
+      if(!query) return;
+      if(query.startsWith('http://') || query.startsWith('https://')) {
+        window.location.href = query;
+      } else {
+        window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+      }
     });
 
-    // Load most visited sites using Chrome History API
+    // Most visited tiles
+    const container = document.getElementById('tilesContainer');
     if(chrome && chrome.topSites) {
       chrome.topSites.get((sites) => {
-        const container = document.getElementById('tilesContainer');
         sites.slice(0, 8).forEach(site => {
           const a = document.createElement('a');
           a.href = site.url;
           a.className = 'tile';
-          a.textContent = site.title || site.url;
           a.target = '_blank';
+          a.innerHTML = `<div>${site.title || site.url}</div>`;
           container.appendChild(a);
         });
       });
     } else {
-      document.getElementById('tilesContainer').innerText = "Most visited sites unavailable";
+      container.textContent = "Most visited sites unavailable";
     }
   </script>
 </body>
