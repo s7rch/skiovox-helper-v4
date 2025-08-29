@@ -113,6 +113,10 @@ async function onCommand(name, currentTab) {
       let lastTab = recentTabs[recentTabs.length - 1];
       chrome.tabs.update(lastTab.id, { active: true });
       break;
+
+    case "FIND_BAR":
+      chrome.tabs.sendMessage(currentTab.id, { action: "FIND_BAR" });
+      break;
   }
 }
 
