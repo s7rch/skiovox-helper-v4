@@ -89,7 +89,7 @@ async function onCommand(name, currentTab) {
     case "FIND_IN_PAGE":
       chrome.scripting.executeScript({
         target: { tabId: currentTab.id },
-        files: ["find_shortcut_fix.js"]
+        files: ["find-shortcut-fix.js"]
       break;
 
     case "SWITCH_WINDOWS":
