@@ -12,7 +12,7 @@ const NEW_TAB_URL = "chrome://new-tab-page";
 const FILES_URL = "chrome://file-manager";
 const HELP_URL = "https://github.com/bypassiwastaken/skiovox-helper";
 const WEBSTORE_URL = "https://chromewebstore.google.com";
-const ADDSESSION_URL = "tinyurl.com/addsessionv3";
+const ADDSESSION_URL = "https://accounts.google.com/v3/signin/identifier?authuser=0&continue=https%3A%2F%2Fwww.google.com%2F&hl=en&flowName=GlifWebSignIn&flowEntry=AddSession";
 
 let [
     help,
