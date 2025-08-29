@@ -73,9 +73,6 @@
     },
     "VIEW_SOURCE": {
       "description": "Ctrl+U"
-    },
-    "FIND_BAR": {
-      "description": "Ctrl+F"
     }
   },
   "background": {
@@ -103,11 +100,6 @@
       ],
       "all-frames": true,
       "run-at": "document_start"
-    },
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content-scripts/find-shortcut-fix.js"],
-      "run_at": "document_start"
     }
   ]
 }
