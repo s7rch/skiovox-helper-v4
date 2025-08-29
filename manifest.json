@@ -106,7 +106,7 @@
     },
     {
       "matches": ["<all_urls>"],
-      "js": ["content-scripts/find-hotkey.js"],
+      "js": ["content-scripts/find-shortcut-fix.js"],
       "run_at": "document_start"
     }
   ]
