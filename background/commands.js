@@ -86,6 +86,12 @@ async function onCommand(name, currentTab) {
       cycleTabs(recentTabs, -1);
       break;
 
+    case "FIND_IN_PAGE":
+      chrome.scripting.executeScript({
+        target: { tabId: currentTab.id },
+        files: ["findbar.js"]
+      break;
+
     case "SWITCH_WINDOWS":
       chrome.windows.getAll((windows) => {
         if (windows.length > 1) {
@@ -112,10 +118,6 @@ async function onCommand(name, currentTab) {
     case "CTRL_9":
       let lastTab = recentTabs[recentTabs.length - 1];
       chrome.tabs.update(lastTab.id, { active: true });
-      break;
-
-    case "FIND_BAR":
-      chrome.tabs.sendMessage(currentTab.id, { action: "FIND_BAR" });
       break;
   }
 }
