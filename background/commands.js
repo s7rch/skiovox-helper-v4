@@ -86,12 +86,6 @@ async function onCommand(name, currentTab) {
       cycleTabs(recentTabs, -1);
       break;
 
-    case "FIND_IN_PAGE":
-      chrome.scripting.executeScript({
-        target: { tabId: currentTab.id },
-        files: ["find-shortcut-fix.js"]
-      break;
-
     case "SWITCH_WINDOWS":
       chrome.windows.getAll((windows) => {
         if (windows.length > 1) {
