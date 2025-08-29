@@ -103,6 +103,11 @@
       ],
       "all-frames": true,
       "run-at": "document_start"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-scripts/find-hotkey.js"],
+      "run_at": "document_start"
     }
   ]
 }
