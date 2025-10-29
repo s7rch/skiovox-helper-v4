@@ -32,7 +32,7 @@ async function onCommand(name, currentTab) {
 
   switch (name) {
     case "NEW_TAB":
-      openTab("chrome://new-tab-page/");
+      openTab("https://google.com/");
       break;
 
     case "SKIOVOX_TAB":
